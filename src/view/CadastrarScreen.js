@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { View, StyleSheet, Text, ImageBackground, TouchableOpacity, TextInput, Image, Alert, SafeAreaView, StatusBar, ScrollView } from 'react-native';
 import {useNavigation} from '@react-navigation/native'
 import { RadioButton } from 'react-native-paper';
@@ -6,7 +6,8 @@ import Checkbox from 'expo-checkbox';
 
 export default function SignupScreen() {
 
-    const [checked, setChecked] = React.useState('first');
+
+    const [checked, setChecked] = useState('Masculino');
     const [isChecked1, setChecked1] = useState(false);
     const [isChecked2, setChecked2] = useState(false);
     const [username, setUsername] = useState();
@@ -16,6 +17,11 @@ export default function SignupScreen() {
     const [sexo, setSexo] = useState();
 
     const navigation = useNavigation();
+
+    useEffect(() => {
+        setChecked('Masculino')
+        setSexo('Masculino')
+    }, [])
 
     function handleAlert() {
         Alert.alert(`Username: ${username}\nNome: ${nome}\nSenha: ${senha}\nConfirmar Senha: ${confSenha}\nSexo: ${sexo}`)
@@ -79,22 +85,22 @@ export default function SignupScreen() {
                 <Text style={styles.txtRadioTitle}>Sexo:</Text>
                 <View style={styles.radio}>
                     <RadioButton
-                        value="first"
-                        status={ checked === 'first' ? 'checked' : 'unchecked' }
-                        onPress={() => {setChecked('first'); setSexo('Masculino')}}
+                        value="Masculino"
+                        status={ checked === 'Masculino' ? 'checked' : 'unchecked' }
+                        onPress={() => {setChecked('Masculino'); setSexo('Masculino')}}
                         style={styles.radioButton}
                     />
-                    <TouchableOpacity onPress={() => setChecked('first')}>
+                    <TouchableOpacity onPress={() => setChecked('Masculino')}>
                         <Text style={styles.radioText}>Masculino</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.radio}>
                     <RadioButton
-                        value="second"
-                        status={ checked === 'second' ? 'checked' : 'unchecked' }
-                        onPress={() => {setChecked('second'); setSexo('Feminino')}}
+                        value="Feminino"
+                        status={ checked === 'Feminino' ? 'checked' : 'unchecked' }
+                        onPress={() => {setChecked('Feminino'); setSexo('Feminino')}}
                     />
-                    <TouchableOpacity onPress={() => setChecked('second')}>
+                    <TouchableOpacity onPress={() => setChecked('Feminino')}>
                         <Text style={styles.radioText}>Feminino</Text>
                     </TouchableOpacity>
                 </View>
@@ -117,7 +123,7 @@ export default function SignupScreen() {
                 <Text style={styles.txtEntrar}>CADASTRAR</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.btnEntrar} onPress={() => navigation.goBack()} >
+            <TouchableOpacity style={styles.btnEntrar} onPress={() => navigation.replace('Login')} >
                 <Text style={styles.txtEntrar}>VOLTAR</Text>
             </TouchableOpacity>
 

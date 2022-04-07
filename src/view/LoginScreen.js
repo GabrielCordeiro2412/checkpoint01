@@ -7,7 +7,7 @@ export default function LoginScreen() {
     const navigation = useNavigation();
 
     function goSignup(){
-        navigation.navigate('Signup')
+        navigation.replace('Signup')
     }
 
     function handleAlert(){
